@@ -1,5 +1,9 @@
 <template>
     <div class="login">
+      <h1>{{ count }}</h1>
+      <h1>{{ doneTodos }}</h1>
+      <button @click="increment">jia</button>
+      <button @click="incrementBy({num:2})">jia</button>
       <div id="loginBox">
         <el-form :model="user" status-icon :rules="rules" ref="ruleForm2" label-width="0px" class="demo-ruleForm">
           <el-form-item prop="email">
@@ -21,6 +25,8 @@
 </template>
 
 <script>
+  import { mapState,mapGetters,mapMutations } from 'vuex'
+
   export default {
     data() {
       const checkIdentifyingCode = (rule, value, callback) => {
@@ -73,7 +79,12 @@
       },
       resetForm(formName) {
         this.$refs[formName].resetFields();
-      }
+      },
+      ...mapMutations(['increment','incrementBy'])
+    },
+    computed: {
+      ...mapState(['count']),
+      ...mapGetters(['doneTodos'])
     }
   }
 </script>
